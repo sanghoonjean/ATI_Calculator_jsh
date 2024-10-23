@@ -70,7 +70,7 @@ namespace WpfCalculator1.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WpfCalculator1;component/views/mainwindowview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WpfCalculator1_czhz3ewf_wpftmp;component/views/mainwindowview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\MainWindowView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
