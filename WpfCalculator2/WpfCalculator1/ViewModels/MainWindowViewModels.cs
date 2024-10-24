@@ -16,9 +16,9 @@ namespace WpfCalculator1.ViewModels
     {
         private string inputData = "";
         private string displayData = "";
+        private string AllData = "";
         public string Oper { get; set; }
-        public double? OpereteAnd { get; set; }
-
+        public double? firstdata { get; set; }
 
         public MainWindowViewModels()
         {
@@ -27,6 +27,7 @@ namespace WpfCalculator1.ViewModels
             this.DataBack = new DataBack(this);
             this.DataClear = new DataClear(this);
             this.DataCalculator = new DataCalculator(this);
+            SaveMemoryCommand = new RelayCommand<string>(SaveMemory);
         }
 
         public ICommand DataOperator { protected get; set; }
@@ -34,6 +35,7 @@ namespace WpfCalculator1.ViewModels
         public ICommand DataBack { protected get; set; }
         public ICommand DataClear { protected get; set; }
         public ICommand DataCalculator { protected get; set; }
+        public ICommand SaveMemoryCommand { protected get; set; }
 
         public string InputData
         {
@@ -64,6 +66,17 @@ namespace WpfCalculator1.ViewModels
             {
                 return displayData;
             }
+        }
+
+        public string Alldata { get; set; }
+
+        private void SaveMemory(string paramerter)
+        {
+            MainModel me = new MainModel();
+            ModelManager _modelManager = new ModelManager();
+            me.Memory = DisplayData;
+
+            _modelManager.SetMemory(me);
         }
     }
 }

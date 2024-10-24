@@ -28,6 +28,7 @@ namespace WpfCalculator1
             //데이터 인풋
             viewmodel.InputData += parameter;
             viewmodel.DisplayData += parameter;
+
         }
     }
     class DataBack : CommandBase
@@ -48,7 +49,7 @@ namespace WpfCalculator1
             int Len = viewmodel.InputData.Length - 1;
             if (0 < Len)
             {
-                viewmodel.InputData = viewmodel.InputData.Substring(0, Len);
+                viewmodel.InputData = viewmodel.DisplayData = viewmodel.InputData.Substring(0, Len);
             }
             else
             {
@@ -73,7 +74,7 @@ namespace WpfCalculator1
         public override void Execute(object parameter)
         {
             viewmodel.InputData = viewmodel.DisplayData = string.Empty;
-            viewmodel.OpereteAnd = null;
+            viewmodel.firstdata = null;
             //데이터 클리어
         }
     }
@@ -93,12 +94,12 @@ namespace WpfCalculator1
         public override void Execute(object parameter)
         {
             string operate = parameter.ToString();
-            double operand;
+            double pfirstdata;
 
-            if (double.TryParse(viewmodel.InputData, out operand))
+            if (double.TryParse(viewmodel.InputData, out pfirstdata))
             {
                 viewmodel.Oper = operate;
-                viewmodel.OpereteAnd = operand;
+                viewmodel.firstdata = pfirstdata;
                 viewmodel.InputData = "";
                 viewmodel.DisplayData += operate;
             }
@@ -136,29 +137,46 @@ namespace WpfCalculator1
 
         public override void Execute(object parameter)
         {
-            double data = double.Parse(viewmodel.InputData);
+            double currentdata = double.Parse(viewmodel.InputData);
+            List<double> datalist = new List<double>();
+            List<char> opreatelist = new List<char>();
             double result = 0;
 
-            if (viewmodel.Oper == "+")
+            GetCalclurateList(datalist, opreatelist);
+
+            for (int j = opreatelist.Count() - 1; j >= 0; j--)
             {
-                result = Myadd((int)viewmodel.OpereteAnd, (int)data);
+                if (opreatelist[j] == '/')
+                {
+                    datalist[j] = MyDivde((int)datalist[j], (int)datalist[j + 1]);
+                    datalist[j + 1] = 0;
+                    opreatelist[j] = '+';
+
+                }
+                else if (opreatelist[j] == '*')
+                {
+                    datalist[j] = Mymultiply((int)datalist[j], (int)datalist[j + 1]);
+                    datalist[j + 1] = 0;
+                    opreatelist[j] = '+';
+                }
+                result = datalist[j];
             }
-            else if (viewmodel.Oper == "-")
+
+            for (int j = 0; j < opreatelist.Count(); j++)
             {
-                result = Mysubtract((int)viewmodel.OpereteAnd, (int)data);
-            }
-            else if(viewmodel.Oper == "*")
-            {
-                result = Mymultiply((int)viewmodel.OpereteAnd, (int)data);
-            }
-            else if(viewmodel.Oper == "/")
-            {
-                result = MyDivde((int)viewmodel.OpereteAnd, (int)data);
+                if (opreatelist[j] == '+')
+                {
+                    datalist[j + 1] = Myadd((int)datalist[j], (int)datalist[j + 1]);
+                }
+                else if (opreatelist[j] == '-')
+                {
+                    datalist[j + 1] = Mysubtract((int)datalist[j], (int)datalist[j + 1]);
+                }
+                result = datalist[j + 1];
             }
 
             viewmodel.InputData = result.ToString();
-            viewmodel.OpereteAnd = null;
-            viewmodel.DisplayData = viewmodel.InputData;
+            viewmodel.firstdata = null;
             //데이터 출력
         }
 
@@ -183,5 +201,26 @@ namespace WpfCalculator1
             return (double)value;
         }
 
+        public void GetCalclurateList(List<double> dlist, List<char> olist)
+        {
+            string splitpoint = "";
+            string palldata = viewmodel.Alldata = viewmodel.DisplayData;
+
+            for (int i = 0; i < palldata.Length; i++)
+            {
+                if (palldata[i] == '*' || palldata[i] == '-' || palldata[i] == '/' || palldata[i] == '+')
+                {
+                    olist.Add(palldata[i]);
+                    dlist.Add(double.Parse(splitpoint));
+                    splitpoint = "";
+                }
+                else
+                {
+                    splitpoint += palldata[i];
+                }
+            }
+
+            dlist.Add(double.Parse(splitpoint));
+        }
     }
 }
