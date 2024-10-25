@@ -16,7 +16,9 @@
       },
       "Wrapper/1.0.0": {
         "runtime": {
-          "Wrapper.dll": {}
+          "Wrapper.dll": {
+            "assemblyVersion": "1.0.0"
+          }
         }
       }
     }

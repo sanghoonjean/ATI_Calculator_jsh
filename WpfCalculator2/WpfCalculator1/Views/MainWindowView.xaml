@@ -42,6 +42,11 @@
             </Setter>
             <Setter Property="Background" Value="White" />
             <Setter Property="FontSize" Value="9" />
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property = "Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         
         
@@ -65,9 +70,13 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
-    
+
+
     <Grid MinWidth="550" MinHeight="500">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition Height="0.2*"></RowDefinition>
@@ -75,6 +84,28 @@
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
+        <TabControl Grid.Column="1" Grid.RowSpan="5">
+            <TabItem Header="Memory">
+                <ListView ItemsSource="{Binding Memory}" 
+                  SelectedItem="{Binding SelectedMemory, Mode=TwoWay}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Memory}" Width="150" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="History">
+                <ListView ItemsSource="{Binding Memory}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding History}" Width="150" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+
         <DockPanel Grid.Row="0" LastChildFill="False">
             <Button Width="50" Height="20" Style="{StaticResource BtnStyle2}" DockPanel.Dock="Left">
 
@@ -162,4 +193,5 @@
             </Button>
         </Grid>
     </Grid>
+
 </Window>

@@ -7,6 +7,7 @@ using WpfCalculator1.ViewModels;
 using WpfCalculator1.Models;
 using System.Windows;
 using Wrapper;
+using Microsoft.VisualBasic;
 
 namespace WpfCalculator1
 {
@@ -26,8 +27,18 @@ namespace WpfCalculator1
         public override void Execute(object parameter)
         {
             //데이터 인풋
-            viewmodel.InputData += parameter;
-            viewmodel.DisplayData += parameter;
+
+            if (viewmodel.InputData == "0")
+            {
+                viewmodel.InputData = viewmodel.DisplayData = string.Empty;
+                viewmodel.InputData += parameter;
+                viewmodel.DisplayData += parameter;
+            }
+            else
+            {
+                viewmodel.InputData += parameter;
+                viewmodel.DisplayData += parameter;
+            }
 
         }
     }
@@ -73,8 +84,8 @@ namespace WpfCalculator1
 
         public override void Execute(object parameter)
         {
-            viewmodel.InputData = viewmodel.DisplayData = string.Empty;
-            viewmodel.firstdata = null;
+            viewmodel.InputData = viewmodel.DisplayData = "0";
+            viewmodel.Firstdata = null;
             //데이터 클리어
         }
     }
@@ -99,7 +110,7 @@ namespace WpfCalculator1
             if (double.TryParse(viewmodel.InputData, out pfirstdata))
             {
                 viewmodel.Oper = operate;
-                viewmodel.firstdata = pfirstdata;
+                viewmodel.Firstdata = pfirstdata;
                 viewmodel.InputData = "";
                 viewmodel.DisplayData += operate;
             }
@@ -141,6 +152,7 @@ namespace WpfCalculator1
             List<double> datalist = new List<double>();
             List<char> opreatelist = new List<char>();
             double result = 0;
+            string _history = "";
 
             GetCalclurateList(datalist, opreatelist);
 
@@ -175,8 +187,10 @@ namespace WpfCalculator1
                 result = datalist[j + 1];
             }
 
-            viewmodel.InputData = result.ToString();
-            viewmodel.firstdata = null;
+            _history = string.Format("{0}{1}{2}", viewmodel.DisplayData, "=", result.ToString());
+            viewmodel.AddHistory(_history);
+            viewmodel.InputData = viewmodel.DisplayData = result.ToString();
+            viewmodel.Firstdata = null;
             //데이터 출력
         }
 
@@ -204,7 +218,7 @@ namespace WpfCalculator1
         public void GetCalclurateList(List<double> dlist, List<char> olist)
         {
             string splitpoint = "";
-            string palldata = viewmodel.Alldata = viewmodel.DisplayData;
+            string palldata = viewmodel.DisplayData;
 
             for (int i = 0; i < palldata.Length; i++)
             {

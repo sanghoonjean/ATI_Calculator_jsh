@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.35325.158
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfCalculator1", "WpfCalculator1\WpfCalculator1.csproj", "{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}"
 EndProject
@@ -25,8 +25,8 @@ Global
 		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Debug|x86.Build.0 = Debug|Any CPU
 		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|x64.ActiveCfg = Release|Any CPU
-		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|x64.Build.0 = Release|Any CPU
+		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|x64.ActiveCfg = Debug|Any CPU
+		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|x64.Build.0 = Debug|Any CPU
 		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{54F8C168-4B4A-48EA-A9A3-4F2663D381CA}.Release|x86.Build.0 = Release|Any CPU
 		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Debug|Any CPU.ActiveCfg = Debug|Win32
@@ -34,9 +34,9 @@ Global
 		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Debug|x64.Build.0 = Debug|x64
 		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Debug|x86.ActiveCfg = Debug|Win32
 		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Debug|x86.Build.0 = Debug|Win32
-		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|Any CPU.ActiveCfg = Release|Win32
-		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|x64.ActiveCfg = Release|x64
-		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|x64.Build.0 = Release|x64
+		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|Any CPU.ActiveCfg = Release|x64
+		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|Any CPU.Build.0 = Release|x64
+		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|x64.ActiveCfg = Debug|x64
 		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|x86.ActiveCfg = Release|Win32
 		{FDCFE67C-6CCA-4B76-998D-F252D9A261F4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection

@@ -10,6 +10,8 @@ namespace WpfCalculator1.Models
     {
         public string Memory { get; set; } = default!;
 
+        public string History { get; set; } = default!;
+
     }
 
 
