@@ -1,26 +1,46 @@
 #include "pch.h"
-
+#include "math.h"
 #include "Wrapper.h"
 
 namespace Wrapper
 {
-	int MyArithmetic::Add(int a, int b)
+	double MyArithmetic::Add(double a, double b)
 	{
 		return a + b;
 	}
 
-	int MyArithmetic::Subtract(int a, int b)
+	double MyArithmetic::Subtract(double a, double b)
 	{
 		return a - b;
 	}
 
-	float MyArithmetic::Multiply(float a, float b)
+	double MyArithmetic::Multiply(double a, double b)
 	{
 		return a * b;
 	}
 
-	float MyArithmetic::Divide(float a, float b)
+	double MyArithmetic::Divide(double a, double b)
 	{
 		return a / b;
+	}
+
+	double MyArithmetic::Exponent(double a)
+	{
+		return 1 / a;
+	}
+
+	double MyArithmetic::Percent(double a, double b)
+	{
+		return a * (b/100);
+	}
+
+	double MyArithmetic::Root(double a)
+	{
+		return sqrt(a);
+	}
+
+	double MyArithmetic::Square(double a)
+	{
+		return a * a;
 	}
 }

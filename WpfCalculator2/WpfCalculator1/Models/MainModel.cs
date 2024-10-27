@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace WpfCalculator1.Models
 {
-    public class MainModel
+    public class ModelMemory
     {
         public string Memory { get; set; } = default!;
+
+    }
+    public class ModelHistory
+    {
 
         public string History { get; set; } = default!;
 
     }
-
 
 }

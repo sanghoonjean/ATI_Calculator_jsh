@@ -26,8 +26,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-        
+
         <Style x:Key="BtnStyle2" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -48,8 +47,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-        
+                
         <Style x:Key="BtnStyle3" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -96,7 +94,7 @@
                 </ListView>
             </TabItem>
             <TabItem Header="History">
-                <ListView ItemsSource="{Binding Memory}">
+                <ListView ItemsSource="{Binding Hisory}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding History}" Width="150" />
@@ -132,10 +130,9 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Button Width="40" Height="20" Style="{StaticResource BtnStyle2}">MC</Button>
-            <Button Width="40" Height="20" Style="{StaticResource BtnStyle2}">MR</Button>
-            <Button Width="40" Height="20" Style="{StaticResource BtnStyle2}">M+</Button>
-            <Button Width="40" Height="20" Style="{StaticResource BtnStyle2}">M-</Button>
+            <Button Width="40" Height="20" Command ="{Binding MemoryClear}" Style="{StaticResource BtnStyle2}">MC</Button>
+            <Button Width="40" Height="20" Command ="{Binding MemorySum}" Style="{StaticResource BtnStyle2}">M+</Button>
+            <Button Width="40" Height="20" Command ="{Binding MemorySubtrac}" Style="{StaticResource BtnStyle2}">M-</Button>
             <Button Width="40" Height="20" Command ="{Binding SaveMemoryCommand}" Style="{StaticResource BtnStyle2}">MS</Button>
         </StackPanel>
         <Grid Grid.Row="4">
@@ -153,17 +150,17 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Tag ="Button_Percent" Grid.Column="0" Grid.Row="0" Command ="{Binding DataInsert}" CommandParameter="7" Style="{StaticResource BtnStyle}">
+            <Button Tag ="Button_Percent" Grid.Column="0" Grid.Row="0" Command ="{Binding DataExpendCalculator}" CommandParameter="Percent" Style="{StaticResource BtnStyle}">
                 <Image Width="15" Height="15" Source="/Resources/percent_discount_icon.png" />
             </Button>
             <Button Tag ="Button_Allcancle" Grid.Column="1" Grid.Row="0" Command ="{Binding DataClear}" Style="{StaticResource BtnStyle}">CE</Button>
-            <Button Tag ="Button_cancle" Grid.Column="2" Grid.Row="0"  Command ="{Binding DataClear}" Style="{StaticResource BtnStyle}">C</Button>
+            <Button Tag ="Button_cancle" Grid.Column="2" Grid.Row="0"  Command ="{Binding DataAllClear}" Style="{StaticResource BtnStyle}">C</Button>
             <Button Tag ="Button_Backspace" Grid.Column="3" Grid.Row="0" Command ="{Binding DataBack}" Style="{StaticResource BtnStyle}">
                 <Image Width="15" Height="15" Source="/Resources/backspace_icon.png" />
             </Button>
-            <Button Tag ="Button_fraction" Grid.Column="0" Grid.Row="1" Style="{StaticResource BtnStyle}">1/x</Button>
-            <Button Tag ="Button_Double" Grid.Column="1" Grid.Row="1" Style="{StaticResource BtnStyle}">X^2</Button>
-            <Button Tag ="Button_Root" Grid.Column="2" Grid.Row="1" Style="{StaticResource BtnStyle}">√</Button>
+            <Button Tag ="Button_Exponent" Grid.Column="0" Grid.Row="1" Command ="{Binding DataExpendCalculator}" CommandParameter="Exponent" Style="{StaticResource BtnStyle}">1/x</Button>
+            <Button Tag ="Button_Square" Grid.Column="1" Grid.Row="1" Command ="{Binding DataExpendCalculator}" CommandParameter="Square" Style="{StaticResource BtnStyle}">X^2</Button>
+            <Button Tag ="Button_Root" Grid.Column="2" Grid.Row="1" Command ="{Binding DataExpendCalculator}" CommandParameter="Root" Style="{StaticResource BtnStyle}">√</Button>
             <Button Tag ="Button_Divide" Grid.Column="3" Grid.Row="1" Command ="{Binding DataOperator}" CommandParameter="/" Style="{StaticResource BtnStyle}">
                 <Image Width="15" Height="15" Source="/Resources/divide_icon.png" />
             </Button>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WpfCalculator1.Models;
+using Wrapper;
 
 namespace WpfCalculator1.ViewModels
 {
@@ -16,34 +17,46 @@ namespace WpfCalculator1.ViewModels
     {
 
         public string Oper { get; set; }
-        public double? Firstdata { get; set; }
+        public double Firstdata { get; set; }
 
         private string inputData = "";
         private string displayData = "";
         private string AllData = "";
         private string memorydata = "";
-        private ObservableCollection<MainModel> _mainModels;
-        private MainModel _selectedmemory;
+        private ObservableCollection<ModelMemory> _modelMemories;
+        private ObservableCollection<ModelHistory> _modelHistories;
+        private ModelMemory _selectedmemory;
+        private MyArithmetic arithmetic = new MyArithmetic();
 
 
         public ICommand DataOperator { protected get; set; }
         public ICommand DataInsert { protected get; set; }
         public ICommand DataBack { protected get; set; }
         public ICommand DataClear { protected get; set; }
+        public ICommand DataAllClear { protected get; set; }
         public ICommand DataCalculator { protected get; set; }
+        public ICommand DataExpendCalculator { protected get; set; }
         public ICommand SaveMemoryCommand { protected get; set; }
-
+        public ICommand MemorySum { protected get; set; }
+        public ICommand MemorySubtrac { protected get; set; }
+        public ICommand MemoryClear { protected get; set; }
 
         public MainWindowViewModels()
         {
-            _mainModels = new ObservableCollection<MainModel>();
+            _modelMemories = new ObservableCollection<ModelMemory>();
+            _modelHistories = new ObservableCollection<ModelHistory>();
 
             this.DataInsert = new DataInsert(this);
             this.DataOperator = new DataOperator(this);
             this.DataBack = new DataBack(this);
             this.DataClear = new DataClear(this);
             this.DataCalculator = new DataCalculator(this);
+            this.DataExpendCalculator = new DataExpendCalculator(this);
+            this.DataAllClear = new DataAllClear(this);
             SaveMemoryCommand = new RelayCommand<string>(SaveMemory);
+            MemorySum = new RelayCommand<string>(SumMemory);
+            MemorySubtrac = new RelayCommand<string>(SubtracMemory);
+            MemoryClear = new RelayCommand<string>(ClearMemory);
         }
         public string InputData
         {
@@ -76,17 +89,26 @@ namespace WpfCalculator1.ViewModels
             }
         }
 
-        public ObservableCollection<MainModel> Memory
+        public ObservableCollection<ModelMemory> Memory
         {
-            get { return _mainModels; }
+            get { return _modelMemories; }
             set
             {
-                _mainModels = value;
+                _modelMemories = value;
                 OnPropertyChanged(nameof(Memory));
             }
         }
+        public ObservableCollection<ModelHistory> Hisory
+        {
+            get { return _modelHistories; }
+            set
+            {
+                _modelHistories = value;
+                OnPropertyChanged(nameof(Hisory));
+            }
+        }
 
-        public MainModel SelectedMemory
+        public ModelMemory SelectedMemory
         {
             get { if (_selectedmemory != null)
                 {
@@ -104,15 +126,53 @@ namespace WpfCalculator1.ViewModels
         {
             if (InputData != "")
             {
-                _mainModels.Add(new MainModel { Memory = InputData });
+                _modelMemories.Add(new ModelMemory { Memory = InputData });
             }
+        }
+
+        private void SumMemory(string paramerter)
+        {
+            double result = 0;
+            string str = "";
+            double value = 0;
+
+            if (InputData != "")
+            {
+                str = _modelMemories[0].Memory;
+                value = double.Parse(str);
+                result = arithmetic.Add(value, value);
+                InputData = result.ToString();
+                _modelMemories.RemoveAt(0);
+                _modelMemories.Insert(0, new ModelMemory { Memory = InputData });
+            }
+        }
+
+        private void SubtracMemory(string paramerter)
+        {
+            double result = 0;
+            string str = "";
+            double value = 0;
+
+            if (InputData != "")
+            {
+                str = _modelMemories[0].Memory;
+                value = double.Parse(str);
+                result = arithmetic.Subtract(value, value);
+                InputData = result.ToString();
+                _modelMemories.RemoveAt(0);
+                _modelMemories.Insert(0, new ModelMemory { Memory = InputData });
+            }
+        }
+        private void ClearMemory(string paramerter)
+        {
+            _modelMemories.Clear();
         }
 
         public void AddHistory(string paramerter)
         {
             if (InputData != "")
             {
-                _mainModels.Add(new MainModel { History = paramerter });
+                _modelHistories.Add(new ModelHistory { History = paramerter });
             }
         }
     }
